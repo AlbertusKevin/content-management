@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ContentTopicController;
+use App\Http\Controllers\DataMaster\IdeaStatusController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,13 @@ use App\Http\Controllers\ContentTopicController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('partial.main');
+})->name("home");
 
-Route::get('/home', [ContentTopicController::class, 'get']);
+Route::prefix('data-master')->name('data-master.')->group(function() {
+    Route::prefix('idea-status')->name('idea-status.')->group(function() {
+        Route::get("/",[IdeaStatusController::class,"get"])->name('get');
+        Route::post("/",[IdeaStatusController::class,"insert"])->name('insert');
+
+    });
+});
