@@ -1,0 +1,4 @@
+ol.breadcrumb li:last-child a {
+    font-weight: bolder;
+    text-decoration: none;
+}
