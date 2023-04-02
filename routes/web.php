@@ -24,6 +24,5 @@ Route::prefix('data-master')->name('data-master.')->group(function() {
     Route::prefix('idea-status')->name('idea-status.')->group(function() {
         Route::get("/",[IdeaStatusController::class,"get"])->name('get');
         Route::post("/",[IdeaStatusController::class,"insert"])->name('insert');
-
     });
 });

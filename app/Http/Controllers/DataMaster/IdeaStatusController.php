@@ -26,20 +26,16 @@ class IdeaStatusController extends Controller
       $this->domain => route("data-master.idea-status.get"),
     ];
 
-    return view('data_master.idea_status.get', compact("bread_crumb", "module"));
+    $list_of_idea_status = $this->idea_status_flow->get();
+
+    return view('data_master.idea_status.get', compact("bread_crumb", "module", "list_of_idea_status"));
   }
 
   public function insert(Request $request)
   {
-    $bread_crumb = [
-      "home" => route("home"),
-      $this->module_name => "#",
-      $this->domain => route("data-master.idea-status.get"),
-    ];
-
     $idea_status = new IdeaStatus($request->status);
     $is_success = $this->idea_status_flow->insert($idea_status);
 
-    return view('index', compact("bread_crumb", "is_success"));
+    return redirect(route('data-master.idea-status.get'));
   }
 }
