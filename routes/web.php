@@ -23,6 +23,9 @@ Route::get('/', function () {
 Route::prefix('data-master')->name('data-master.')->group(function() {
     Route::prefix('idea-status')->name('idea-status.')->group(function() {
         Route::get("/",[IdeaStatusController::class,"get"])->name('get');
+        Route::get("/{idea_status_id}",[IdeaStatusController::class,"find"])->name('find');
         Route::post("/",[IdeaStatusController::class,"insert"])->name('insert');
+        Route::put("/{idea_status_id}",[IdeaStatusController::class,"update"])->name('update');
+        Route::delete("/{idea_status_id}",[IdeaStatusController::class,"delete"])->name('delete');
     });
 });

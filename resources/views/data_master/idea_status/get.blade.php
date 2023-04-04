@@ -21,11 +21,19 @@
                         <tbody>
                             @foreach ($list_of_idea_status as $idea_status)
                                 <tr>
-                                    <th scope="row">{{ $idea_status->getId() }}</th>
-                                    <td>{{ $idea_status->getStatus() }}</td>
+                                    <th scope="row">{{ $idea_status->id }}</th>
+                                    <td>{{ $idea_status->status }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                        <div class="d-flex">
+                                            <form method="post"
+                                                action="{{ route('data-master.idea-status.delete', $idea_status->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-info btn-sm me-2 edit-status"
+                                                    data-id_status="{{ $idea_status->id }}">Ubah</button>
+                                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -37,4 +45,9 @@
         </div>
     </div>
     @include('data_master.idea_status.form_create')
+    @include('data_master.idea_status.form_update')
 @endsection
+
+@push('script')
+    <script type="text/javascript" src="{{ url('js/idea_status.js') }}"></script>
+@endpush
